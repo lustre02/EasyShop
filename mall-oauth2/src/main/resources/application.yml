@@ -1,0 +1,52 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://192.168.172.110:3306/oauth2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.172.110:8848
+  application:
+    name: mall-oauth2-server
+  redis:
+    host: 192.168.172.110
+    port: 6379
+dubbo:
+  registry:
+    address: nacos://192.168.172.110
+    port: 8848
+  protocol:
+    serialization: kryo
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: com.lustre.mall.oauth2.service.impl
+  provider:
+    loadbalance: roundrobin
+    version: 1.0.0
+  consumer:
+    loadbalance: roundrobin
+    version: 1.0.0
+  application:
+    version: 1.0.0
+management:
+  # 端点检查（健康检查）
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+seata:
+  registry:
+    nacos:
+      server-addr: 192.168.172.110:8848
+  tx-service-group: ${spring.application.name}-group
+  service:
+    vgroup-mapping:
+      mall-oauth2-server-group: default

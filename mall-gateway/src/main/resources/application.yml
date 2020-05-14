@@ -1,0 +1,34 @@
+server:
+  port: 80
+spring:
+  cloud:
+    gateway:
+      enabled: true
+      discovery:
+        locator:
+          enabled: true
+      set-status:
+        original-status-header-name: "*"
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowCredentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes: [
+        "Admin=lb://mall-admin-controller,Path=/api/admin/**",
+        "Content=lb://mall-content-controller,Path=/api/content/**",
+        "Item=lb://mall-item-controller,Path=/api/item/**",
+        "OAuth2=lb://mall-oauth2-server,Path=/oauth/**",
+        "OSS=lb://mall-alicloud-oss,Path=/api/oss/**",
+      ]
+    nacos:
+      discovery:
+        server-addr: 192.168.172.110:8848
+  application:
+    name: mall-gateway
+  main:
+    allow-bean-definition-overriding: true
+

@@ -1,0 +1,44 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: mall-content-controller
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.172.110:8848
+dubbo:
+  registry:
+    address: nacos://192.168.172.110
+    port: 8848
+  protocol:
+    serialization: kryo
+    name: dubbo
+    port: -1
+  provider:
+    loadbalance: roundrobin
+    version: 1.0.0
+  consumer:
+    loadbalance: roundrobin
+    version: 1.0.0
+  application:
+    version: 1.0.0
+server:
+  port: 8082
+security:
+  oauth2:
+    client:
+      client-id: myshop
+      client-secret: secret
+      access-token-uri: http://localhost/oauth/token
+      user-authorization-uri: http://localhost/oauth/authorize
+    resource:
+      token-info-uri: http://localhost/oauth/check_token
+seata:
+  registry:
+    nacos:
+      server-addr: 192.168.172.110:8848
+  tx-service-group: ${spring.application.name}-group
+  service:
+    vgroup-mapping:
+      mall-content-controller-group: default

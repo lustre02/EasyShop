@@ -1,0 +1,26 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.172.110:8848
+    alicloud:
+      oss:
+        endpoint: oss-cn-beijing.aliyuncs.com
+      access-key: xxxxxxxxxxxxx
+      secret-key: xxxxxxxxxxxxx 
+  application:
+    name: mall-alicloud-oss
+  servlet:
+    multipart:
+      max-file-size: 10MB
+server:
+  # 服务端口
+  port: 8088
+management:
+  # 端点检查（健康检查）
+  endpoints:
+    web:
+      exposure:
+        include: "*"
