@@ -18,7 +18,7 @@
         <mybatis.version>2.1.1</mybatis.version>
         <guava.version>21.0</guava.version>
         <dubbo-kryo.version>2.7.5</dubbo-kryo.version>
-        <httpclient.version>4.5.12</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <okhttp3.version>4.1.0</okhttp3.version>
         <pagehelper-spring-boot.version>1.2.13</pagehelper-spring-boot.version>
         <seata.version>1.1.0</seata.version>
